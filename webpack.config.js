@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     entry: './src/index.js',
@@ -16,13 +17,19 @@ module.exports = {
             ]
         }, {
             test: '/\.css$/',
-            use: ['style-loader', 'css-loader'],
+            //use: ['style-loader', 'css-loader'],
+            use: ExtractTextPlugin.extract({
+                use: ['style-loader', 'css-loader']
+            })
         }, {
             test: /\.(png|jpg|gif)$/,
             loader: 'url-loader?limit=8192'
         }, {
             test: /\.svg/,
             loader: 'svg-url-loader'
+        }, {
+            test: /\.(woff2?|eot|ttf|otf)$/,
+            loader: 'url-loader?limit=10240&name=fonts/[name]-[hash:6].[ext]'
         }]
     },
     devServer: {
@@ -43,6 +50,7 @@ module.exports = {
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': '"development"',
         }),
+        new ExtractTextPlugin('styles.css'),
         new webpack.HotModuleReplacementPlugin(),
     ],
     stats: {

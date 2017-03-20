@@ -4,5 +4,6 @@ import _ from 'lodash';
 angular.module('app', [])
     .controller('one', ['$rootScope', '$scope', function($rootScope, $scope) {
         $scope.firstName = "tony";
-        $scope.lastName = "ppp";
+        $scope.lastName = "uuu";
+        
     }])
