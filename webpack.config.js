@@ -16,7 +16,13 @@ module.exports = {
             ]
         }, {
             test: '/\.css$/',
-            use: ['style-loader','css-loader'],
+            use: ['style-loader', 'css-loader'],
+        }, {
+            test: /\.(png|jpg|gif)$/,
+            loader: 'url-loader?limit=8192'
+        }, {
+            test: /\.svg/,
+            loader: 'svg-url-loader'
         }]
     },
     devServer: {
@@ -24,6 +30,7 @@ module.exports = {
         port: 9000,
         historyApiFallback: true,
         hot: true,
+        inline: true,
         noInfo: true
     },
     plugins: [
