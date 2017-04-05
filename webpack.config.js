@@ -1,26 +1,31 @@
 var webpack = require('webpack');
 var path = require('path');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
-
 module.exports = {
     entry: './src/index.js',
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: '/dist/'
     },
     module: {
         rules: [{
-            test: '/\.js$/',
+            test: /\.js$/,
             loader: 'babel-loader',
             include: [
                 path.resolve(__dirname, "src")
             ]
         }, {
-            test: '/\.css$/',
-            //use: ['style-loader', 'css-loader'],
-            use: ExtractTextPlugin.extract({
-                use: ['style-loader', 'css-loader']
-            })
+            test: /\.css$/,
+            //loader: 'css-loader'
+            use: ['style-loader', 'css-loader'],
+            /*use: ExtractTextPlugin.extract({
+                fallback: "style-loader",
+                use: "css-loader"
+            }),*/
+            include: [
+                path.resolve(__dirname, "lib/css/")
+            ]
         }, {
             test: /\.(png|jpg|gif)$/,
             loader: 'url-loader?limit=8192'
@@ -32,14 +37,6 @@ module.exports = {
             loader: 'url-loader?limit=10240&name=fonts/[name]-[hash:6].[ext]'
         }]
     },
-    devServer: {
-        compress: true,
-        port: 9000,
-        historyApiFallback: true,
-        hot: true,
-        inline: true,
-        noInfo: true
-    },
     plugins: [
         new webpack.optimize.UglifyJsPlugin({
             compress: {
@@ -50,9 +47,25 @@ module.exports = {
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': '"development"',
         }),
-        new ExtractTextPlugin('styles.css'),
+        //new ExtractTextPlugin('style.css'),
         new webpack.HotModuleReplacementPlugin(),
     ],
+    resolve: {
+        alias:{
+            resetcss$: path.resolve(__dirname, 'lib/css/reset.css'),
+            commoncss$: path.resolve(__dirname, 'lib/css/common.css')
+        }
+    },
+    devServer: {
+        //contentBase: path.resolve(__dirname, 'dist'),
+        compress: true,
+        port: 9000,
+        /*在开发单页应用时非常有用，它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html*/
+        historyApiFallback: true,
+        hot: true,
+        inline: true,
+        noInfo: true
+    },
     stats: {
         assets: true,
         colors: true,
