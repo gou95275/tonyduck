@@ -1,6 +1,9 @@
 var webpack = require('webpack');
 var path = require('path');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+
 module.exports = {
     entry: './src/index.js',
     output: {
@@ -24,7 +27,7 @@ module.exports = {
                 use: "css-loader"
             }),*/
             include: [
-                path.resolve(__dirname, "lib/css/")
+                path.resolve(__dirname, "lib/css")
             ]
         }, {
             test: /\.(png|jpg|gif)$/,
@@ -49,9 +52,16 @@ module.exports = {
         }),
         //new ExtractTextPlugin('style.css'),
         new webpack.HotModuleReplacementPlugin(),
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: 'index.html',
+            inject: true
+        }),
+        new FriendlyErrorsPlugin()
+
     ],
     resolve: {
-        alias:{
+        alias: {
             resetcss$: path.resolve(__dirname, 'lib/css/reset.css'),
             commoncss$: path.resolve(__dirname, 'lib/css/common.css')
         }
