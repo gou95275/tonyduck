@@ -52,7 +52,7 @@ var webpackConfig = merge(baseWebpackConfig, {
         // see https://github.com/ampedandwired/html-webpack-plugin
         new HtmlWebpackPlugin({
             filename: path.resolve(__dirname, 'dist/index.html'),
-            template: 'index.html',
+            template: 'src/index.html',
             inject: true,
             minify: {
                 removeComments: true,
