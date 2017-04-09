@@ -1,11 +1,12 @@
 import angular from 'angular';
-import _ from 'lodash';
-//import reset from '../lib/css/reset.css'
-import 'resetcss'
-import 'commoncss'
+import 'resetcss';
+import 'commoncss';
+/*if (process.env.NODE_ENV !== 'production') {
+  require('./index.html')
+}*/
+var app = angular.module('app', [])
 
-angular.module('app', [])
-    .controller('one', ['$rootScope', '$scope', function($rootScope, $scope) {
-        $scope.firstName = "tony";
-        $scope.lastName = "ppp";
-    }])
+app.controller('one', ['$rootScope', '$scope', function($rootScope, $scope) {
+    $scope.firstName = "tony";
+    $scope.lastName = "ooo";
+}])

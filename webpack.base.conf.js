@@ -1,24 +1,23 @@
 var path = require('path');
+var webpack = require('webpack')
 
-function resolve (dir) {
-  return path.join(__dirname, dir)
+function resolve(dir) {
+    return path.join(__dirname, dir)
 }
 
 module.exports = {
     entry: {
         app: './src/index.js'
     },
-    output: {
+    /*output: {
         filename: '[name].js',
-        ,
-        path: path.resolve(__dirname, 'dist'),
+        path: resolve('dist'),
         publicPath: '/'
-    },
+    },*/
     resolve: {
-        extensions: ['.js', '.json'],
         alias: {
-            resetcss$: path.resolve(__dirname, 'lib/css/reset.css'),
-            commoncss$: path.resolve(__dirname, 'lib/css/common.css')
+            resetcss$: resolve('src/lib/css/reset.css'),
+            commoncss$: resolve('src/lib/css/common.css')
         }
     },
     module: {
@@ -26,7 +25,13 @@ module.exports = {
             test: /\.js$/,
             loader: 'babel-loader',
             include: [
-                resolve('src')
+                resolve('src'),
+            ]
+        }, {
+            test: /\.css$/,
+            loaders: ['style-loader', 'css-loader'],
+            include: [
+                resolve('src'),
             ]
         }, {
             test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -43,5 +48,10 @@ module.exports = {
                 name: 'static/fonts/[name].[hash:7].[ext]'
             }
         }]
-    }
+    },
+    plugins: [
+        new webpack.ProvidePlugin({
+            _: 'lodash'
+        }),
+    ]
 };

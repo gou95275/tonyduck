@@ -6,21 +6,19 @@ var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 
 module.exports = merge(baseWebpackConfig, {
     module: {
-        rules: [{
-            test: /\.css$/,
-            loader: 'css-loader',
-            options: {
-                minimize: false,
-                sourceMap: false
+        rules: [
+            {
+                test: /\.html$/,
+                loader: "raw-loader"
             }
-        }]
+        ]
     },
     // cheap-module-eval-source-map is faster for development
     devtool: '#cheap-module-eval-source-map',
     plugins: [
         new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: '"development"'
+                NODE_ENV: JSON.stringify('development')
             }
         }),
         // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
@@ -33,5 +31,10 @@ module.exports = merge(baseWebpackConfig, {
             inject: true
         }),
         new FriendlyErrorsPlugin()
-    ]
+    ],
+    devServer: {
+        //contentBase: './dist',
+        compress: true,
+        port: 9000
+    }
 })

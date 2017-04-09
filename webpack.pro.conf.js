@@ -7,12 +7,8 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
-var env = {
-    NODE_ENV: '"production"'
-}
-
 var webpackConfig = merge(baseWebpackConfig, {
-    module: {
+    /*module: {
         rules: [{
             test: /\.css$/,
             loader: 'css-loader',
@@ -22,7 +18,7 @@ var webpackConfig = merge(baseWebpackConfig, {
                 sourceMap: false
             }
         }]
-    },
+    },*/
     devtool: '#source-map',
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -32,7 +28,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     plugins: [
         // http://vuejs.github.io/vue-loader/en/workflow/production.html
         new webpack.DefinePlugin({
-            'process.env': env
+            'process.env.NODE_ENV': JSON.stringify('production')
         }),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
@@ -91,7 +87,7 @@ var webpackConfig = merge(baseWebpackConfig, {
         // copy custom static assets
         new CopyWebpackPlugin([{
             from: path.resolve(__dirname, 'static'),
-            to: config.build.assetsSubDirectory,
+            to: 'static',
             ignore: ['.*']
         }])
     ]
@@ -106,7 +102,7 @@ if (false) {
             algorithm: 'gzip',
             test: new RegExp(
                 '\\.(' +
-                config.build.productionGzipExtensions.join('|') +
+                ['js', 'css'].join('|') +
                 ')$'
             ),
             threshold: 10240,
