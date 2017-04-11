@@ -10,14 +10,15 @@ module.exports = {
         app: './src/index.js'
     },
     /*output: {
-        filename: '[name].js',
-        path: resolve('dist'),
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'static/js/[name].[chunkhash].js',
         publicPath: '/'
     },*/
     resolve: {
         alias: {
             resetcss$: resolve('src/lib/css/reset.css'),
-            commoncss$: resolve('src/lib/css/common.css')
+            commoncss$: resolve('src/lib/css/common.css'),
+            font$: resolve('src/lib/font/fontello/css/fontello.css'),
         }
     },
     module: {

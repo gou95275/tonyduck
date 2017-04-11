@@ -1,6 +1,10 @@
-import angular from 'angular';
 import 'resetcss';
 import 'commoncss';
+import 'font'
+import './css/style.css'
+
+import angular from 'angular';
+
 
 /*if (process.env.NODE_ENV !== 'production') {
   require('./index.html')

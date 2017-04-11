@@ -1,0 +1,83 @@
+body {
+    font-family: 'Microsoft YaHei', tahoma, arial, sans-serif;
+    word-wrap: break-word;
+    background-image: linear-gradient(to right, rgba(79, 172, 254, 0.53) 0%, rgba(0, 242, 254, 0.1) 100%);
+    overflow-x: hidden;
+}
+
+.header {
+    height: 45px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    color: rgba(255, 255, 255, 0.75);
+    background-color: #24292e;
+}
+
+.container {
+    width: 980px;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+
+.logo {
+    float: left;
+    width: 35px;
+    height: 35px;
+    margin: -1px 15px -1px -2px;
+    color: #fff;
+    background-image: url('../lib/img/logo.png');
+    background-size: 100%;
+    white-space: nowrap;
+    border-radius: 50%;
+}
+
+.nav li {
+    float: left;
+    position: relative;
+}
+
+.nav a {
+    display: block;
+    padding: 0 12px;
+    line-height: 32px;
+    color: #ccc;
+    text-decoration: none;
+}
+
+.nav a:hover {
+    color: #f1f1f1;
+}
+
+.nav a i {
+    font-size: 14px;
+}
+
+.nav a .nav-text {
+    font-size: 15px;
+}
+
+.nav .search {
+    margin-top: 2px;
+    margin-left: 20px;
+    background-color: rgba(255, 255, 255, .1);
+    border-radius: 15px;
+    border: none;
+    height: 30px;
+    padding: 0 25px 0 10px;
+    line-height: 20px;
+    font-size: 14px;
+    color: #fff;
+    width: 170px;
+    outline: none;
+}
+
+.nav .search-icon {
+    position: absolute;
+    top: 6px;
+    right: 5px;
+    cursor: pointer;
+}
+
+.nav .search-icon:hover {
+    color: #f1f1f1;
+}
