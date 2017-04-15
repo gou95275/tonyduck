@@ -33,7 +33,7 @@ body {
     height: 35px;
     margin: -1px 15px -1px -2px;
     color: #fff;
-    background-image: url('../lib/img/logo.png');
+    background-image: url('../static/img/logo.png');
     background-size: 100%;
     white-space: nowrap;
     border-radius: 50%;

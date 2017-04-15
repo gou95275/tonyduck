@@ -5,14 +5,12 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 
 module.exports = merge(baseWebpackConfig, {
-    module: {
-        rules: [
-            {
-                test: /\.html$/,
-                loader: "raw-loader"
+    /*module: {
+        rules: [{
+                
             }
         ]
-    },
+    },*/
     // cheap-module-eval-source-map is faster for development
     devtool: '#cheap-module-eval-source-map',
     plugins: [
@@ -28,12 +26,23 @@ module.exports = merge(baseWebpackConfig, {
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: 'src/index.html',
-            inject: true
+            inject: true,
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                removeRedundantAttributes: true,
+                useShortDoctype: true,
+                removeEmptyAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                keepClosingSlash: true,
+                minifyJS: true,
+                minifyCSS: true,
+                minifyURLs: true
+            }
         }),
         new FriendlyErrorsPlugin()
     ],
     devServer: {
-        //contentBase: './dist',
         compress: true,
         port: 9000
     }

@@ -9,20 +9,23 @@ module.exports = {
     entry: {
         app: './src/index.js'
     },
-    /*output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'static/js/[name].[chunkhash].js',
-        publicPath: '/'
-    },*/
     resolve: {
         alias: {
-            resetcss$: resolve('src/lib/css/reset.css'),
-            commoncss$: resolve('src/lib/css/common.css'),
-            font$: resolve('src/lib/font/fontello/css/fontello.css'),
+            '@': resolve('src/template'),
+            resetcss$: resolve('src/static/css/reset.css'),
+            commoncss$: resolve('src/static/css/common.css'),
+            font$: resolve('src/static/font/fontello/css/fontello.css'),
         }
     },
     module: {
         rules: [{
+            test: /\.html$/,
+            //loader: "raw-loader",
+            loader: ['raw-loader'],
+            include: [
+                resolve('src'),
+            ]
+        }, {
             test: /\.js$/,
             loader: 'babel-loader',
             include: [

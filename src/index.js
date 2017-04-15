@@ -1,17 +1,25 @@
+import angular from 'angular';
+import 'angular-ui-router'
+
 import 'resetcss';
 import 'commoncss';
-import 'font'
-import './css/style.css'
+import 'font';
+import './css/style.css';
 
-import angular from 'angular';
+var headernav = require('@/headernav.html');
 
 
 /*if (process.env.NODE_ENV !== 'production') {
   require('./index.html')
 }*/
-var app = angular.module('app', [])
-
-app.controller('one', ['$rootScope', '$scope', function($rootScope, $scope) {
-    $scope.firstName = "tony";
-    $scope.lastName = "fff";
-}])
+angular.module('app', ['ui.router'])
+    .value("myProfile", {
+        QQ: "736726698@qq.com",
+    })
+    .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+        $urlRouterProvider.otherwise('/');
+    }])
+    .component('headerNav', {
+        template: headernav,
+        controller: function() {}
+    })

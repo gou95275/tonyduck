@@ -8,8 +8,9 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
 var webpackConfig = merge(baseWebpackConfig, {
-    /*module: {
-        rules: [{
+   /* module: {
+        rules: [
+        {
             test: /\.css$/,
             loader: 'css-loader',
             options: {
@@ -22,6 +23,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     devtool: '#source-map',
     output: {
         path: path.resolve(__dirname, 'dist'),
+        publicPath: '/', 
         filename: 'static/js/[name].[chunkhash].js',
         chunkFilename: 'static/js/[id].[chunkhash].js'
     },
@@ -85,35 +87,12 @@ var webpackConfig = merge(baseWebpackConfig, {
             chunks: ['vendor']
         }),
         // copy custom static assets
-        new CopyWebpackPlugin([{
+        /*new CopyWebpackPlugin([{
             from: path.resolve(__dirname, 'static'),
             to: 'static',
             ignore: ['.*']
-        }])
+        }])*/
     ]
 })
-
-if (false) {
-    var CompressionWebpackPlugin = require('compression-webpack-plugin')
-
-    webpackConfig.plugins.push(
-        new CompressionWebpackPlugin({
-            asset: '[path].gz[query]',
-            algorithm: 'gzip',
-            test: new RegExp(
-                '\\.(' +
-                ['js', 'css'].join('|') +
-                ')$'
-            ),
-            threshold: 10240,
-            minRatio: 0.8
-        })
-    )
-}
-
-if (process.env.npm_config_report) {
-    var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-    webpackConfig.plugins.push(new BundleAnalyzerPlugin())
-}
 
 module.exports = webpackConfig
